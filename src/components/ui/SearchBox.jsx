@@ -2,7 +2,11 @@
 import { cn } from "@/lib/utils";
 import { Search } from "lucide-react";
 
-const SearchBox = ({ onSubmit = () => {}, className = "" }) => {
+const SearchBox = ({
+  className = "",
+  defaultValue = "",
+  onSubmit = () => {},
+}) => {
   return (
     <form
       onSubmit={onSubmit}
@@ -19,6 +23,7 @@ const SearchBox = ({ onSubmit = () => {}, className = "" }) => {
         id="search"
         name="search"
         type="search"
+        defaultValue={defaultValue}
         className="size-full pl-2.5 outline-none"
         placeholder="Search free Figma designs..."
       />
