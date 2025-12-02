@@ -1,18 +1,27 @@
 "use client";
 
-// Next
-import Link from "next/link";
-
 // Components
 import Logo from "../ui/Logo";
 
 // Constants
-import { ROUTES } from "@/lib/constants";
+import { cn } from "@/lib/utils";
+
+// Next.js
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const Footer = () => {
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
+
   return (
-    <footer className="bg-gradient-to-t from-gray-100 py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <footer
+      className={cn(
+        "py-12",
+        isHomePage ? "bg-gradient-to-t from-gray-100" : "bg-gray-50"
+      )}
+    >
+      <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="col-span-1 space-y-3.5">
@@ -32,18 +41,10 @@ const Footer = () => {
             <ul className="space-y-2 text-gray-500">
               <li>
                 <Link
-                  href={ROUTES.EXPLORE}
+                  href="/explore/all"
                   className="transition-colors duration-200 hover:text-violet-500"
                 >
                   Explore
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={ROUTES.CATEGORIES}
-                  className="transition-colors duration-200 hover:text-violet-500"
-                >
-                  Categories
                 </Link>
               </li>
             </ul>
@@ -103,7 +104,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom */}
-        <div className="mt-8 pt-8 border-t border-gray-300 flex flex-col md:flex-row justify-between items-center">
+        <div className="mt-12 pt-12 border-t border-gray-300 flex flex-col md:flex-row justify-between items-center">
           {/* Copyright */}
           <p className="text-sm text-gray-400">
             © 2025 Figma Market. All rights reserved.
