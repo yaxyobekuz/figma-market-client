@@ -12,6 +12,9 @@ import Link from "next/link";
 // Utils
 import { cn } from "@/lib/utils";
 
+// React
+import { Suspense } from "react";
+
 // Icons
 import { Heart } from "lucide-react";
 
@@ -20,25 +23,8 @@ import Logo from "../ui/Logo";
 import SearchBox from "../ui/SearchBox";
 
 const Header = () => {
-  const router = useRouter();
-  const params = useParams();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
-
   const isHomePage = pathname === "/";
-  const category = params.category || "all";
-  const searchQuery = searchParams.get("searchQuery");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const query = e.target.search.value.trim();
-
-    if (query) {
-      router.push(
-        `/explore/${category}?searchQuery=${encodeURIComponent(query)}`
-      );
-    }
-  };
 
   return (
     <div
@@ -82,9 +68,37 @@ const Header = () => {
         </div>
       )}
 
-      <div className="container">
-        <SearchBox onSubmit={handleSubmit} defaultValue={searchQuery} />
-      </div>
+      <Suspense
+        fallback={<div className="container" children={<SearchBox />} />}
+      >
+        <SearchContent />
+      </Suspense>
+    </div>
+  );
+};
+
+const SearchContent = () => {
+  const router = useRouter();
+  const params = useParams();
+  const searchParams = useSearchParams();
+
+  const category = params.category || "all";
+  const searchQuery = searchParams.get("searchQuery");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const query = e.target.search.value.trim();
+
+    if (query) {
+      router.push(
+        `/explore/${category}?searchQuery=${encodeURIComponent(query)}`
+      );
+    }
+  };
+
+  return (
+    <div className="container">
+      <SearchBox onSubmit={handleSubmit} defaultValue={searchQuery} />
     </div>
   );
 };
