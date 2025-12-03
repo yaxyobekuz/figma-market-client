@@ -44,7 +44,7 @@ const Header = () => {
           {/* Saved */}
           <Link
             href="/saved"
-            className="flex items-center gap-3 h-11 bg-white px-4 rounded-full"
+            className="flex items-center gap-3 h-11 bg-white px-4 rounded-full transition-colors duration-200 hover:text-violet-500"
           >
             <Heart strokeWidth={1.5} />
             <span>Saved Designs</span>

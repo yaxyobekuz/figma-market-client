@@ -1,5 +1,7 @@
-// Icons
+// Utils
 import { cn } from "@/lib/utils";
+
+// Icons
 import { Search } from "lucide-react";
 
 const SearchBox = ({
@@ -29,7 +31,7 @@ const SearchBox = ({
       />
 
       {/* Submit button */}
-      <button className="flex items-center justify-center shrink-0 bg-violet-500 rounded-full py-1.5 px-7 mr-1.5 text-white">
+      <button className="flex items-center justify-center shrink-0 h-[calc(100%-4px)] bg-violet-500 rounded-full px-7 mr-0.5 text-white transition-colors duration-200 hover:bg-violet-700">
         Search
       </button>
     </form>
