@@ -1,10 +1,19 @@
 // Components
 import DesignItem from "@/components/ui/DesignItem";
+import Breadcrumb from "@/components/ui/Breadcrumb";
 
 const Saved = () => {
+  const breadcrumbItems = [
+    { label: "Home", href: "/" },
+    { label: "Saved Designs", href: "/saved" },
+  ];
+
   return (
     <div className="py-12">
       <div className="container space-y-12">
+        {/* Breadcrumb */}
+        <Breadcrumb items={breadcrumbItems} />
+
         {/* Title */}
         <h1 className="text-3xl font-medium">Saved Designs</h1>
 
