@@ -3,9 +3,17 @@ import Link from "next/link";
 
 // Data
 import categories from "@/data/categories.data";
+
+// Components
 import DesignItem from "@/components/ui/DesignItem";
 
-const Home = () => {
+// API
+import { getPopularDesigns } from "@/api/design.api";
+
+const Home = async () => {
+  // Fetch popular designs
+  const designs = await getPopularDesigns();
+
   return (
     <>
       {/* Categories Section */}
@@ -41,12 +49,14 @@ const Home = () => {
           {/* Title */}
           <h2 className="text-2xl font-medium">Popular Designs</h2>
 
-          {/* Placeholder for popular designs */}
-          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {Array.from({ length: 9 }).map((_, index) => (
-              <DesignItem key={index} />
-            ))}
-          </ul>
+          {/* Popular designs list */}
+          {designs.length > 0 ? (
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {designs.map((design) => (
+                <DesignItem key={design._id} {...design} />
+              ))}
+            </ul>
+          ) : null}
         </div>
       </section>
     </>
