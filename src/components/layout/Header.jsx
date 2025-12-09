@@ -87,12 +87,14 @@ const SearchContent = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const query = e.target.search.value.trim();
+    const query = e.target.search.value?.trim();
 
     if (query) {
       router.push(
         `/explore/${category}?searchQuery=${encodeURIComponent(query)}`
       );
+    } else {
+      router.push(`/explore/${category}`);
     }
   };
 
