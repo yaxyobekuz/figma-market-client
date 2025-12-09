@@ -7,14 +7,16 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: '**.digitaloceanspaces.com',
+        protocol: "https",
+        hostname: "**.figmamarket.com",
       },
       {
-        protocol: 'https',
-        hostname: 'lh3.googleusercontent.com',
+        protocol: "http",
+        hostname: "localhost",
+        port: "8080",
       },
     ],
+    unoptimized: process.env.NODE_ENV === "development",
   },
 };
 
