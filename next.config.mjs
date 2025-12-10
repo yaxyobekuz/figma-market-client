@@ -8,12 +8,14 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "**.figmamarket.com",
+        hostname: "api.figmamarket.com",
+        pathname: "/**",
       },
       {
         protocol: "http",
         hostname: "localhost",
         port: "8080",
+        pathname: "/**",
       },
     ],
     unoptimized: process.env.NODE_ENV === "development",

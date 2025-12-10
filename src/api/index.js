@@ -7,7 +7,7 @@ const getApiImageUrl = (path) => {
   if (!path) return null;
   // Remove leading slash if present
   const cleanPath = path.startsWith("/") ? path.slice(1) : path;
-  return `${API_URL.replace("/api", "")}/${cleanPath}`;
+  return `${API_URL.slice(0, -4)}/${cleanPath}`;
 };
 
 /**
