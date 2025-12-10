@@ -57,18 +57,15 @@ const DesignDetail = async ({ params }) => {
 
             {/* Preview Images */}
             {design.previewImages.map((img, index) => (
-              <div
-                key={img._id}
-                className="relative w-full h-auto bg-gray-100 rounded-3xl overflow-hidden"
-              >
-                <Image
-                  width={600}
-                  height={450}
-                  src={getApiImageUrl(img.path)}
-                  alt={`${design.title} preview ${index + 1}`}
-                  className="size-full object-cover"
-                />
-              </div>
+              <Image
+                key={index}
+                width={600}
+                height={450}
+                loading="lazy"
+                src={getApiImageUrl(img.path)}
+                alt={`${design.title} preview ${index + 1}`}
+                className="w-full h-auto bg-gray-100 rounded-3xl border"
+              />
             ))}
           </div>
 
