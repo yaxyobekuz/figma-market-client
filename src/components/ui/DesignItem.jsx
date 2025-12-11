@@ -2,14 +2,20 @@
 import Link from "next/link";
 import Image from "next/image";
 
+// Utils
+import { cn } from "@/lib/utils";
+
+// Icons
+import { Eye } from "lucide-react";
+
+// Components
+import LikeButton from "./LikeButton";
+
 // Api
 import { getApiImageUrl } from "@/api";
 
-// Icons
-import { Eye, Heart } from "lucide-react";
-import { cn } from "@/lib/utils";
-
-const DesignItem = ({ className, _id: id, title, viewsCount, thumbnail }) => {
+const DesignItem = ({ className, data }) => {
+  const { _id: id, title, viewsCount, thumbnail } = data || {};
   const thumbnailUrl = getApiImageUrl(thumbnail?.path);
 
   return (
@@ -26,9 +32,7 @@ const DesignItem = ({ className, _id: id, title, viewsCount, thumbnail }) => {
         />
 
         {/* Toggle Like button */}
-        <button className="absolute top-3.5 right-3.5 z-10 bg-white text-gray-600 p-2.5 rounded-full hover:text-violet-500 transition-colors">
-          <Heart strokeWidth={1.5} size={20} />
-        </button>
+        <LikeButton design={data} className="absolute top-3.5 right-3.5 z-10" />
       </div>
 
       {/* Main */}
