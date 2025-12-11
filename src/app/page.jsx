@@ -102,14 +102,14 @@ const Home = async () => {
           </h2>
 
           {/* Categories list*/}
-          <nav aria-label="Design categories">
-            <ul className="flex gap-1">
+          <nav aria-label="Design categories" className="overflow-x-auto">
+            <ul className="flex gap-3.5 pb-3.5 lg:pb-0">
               {categories.map((category) => (
                 <li key={category.slug} className="w-full">
                   <Link
                     href={category.href}
-                    className="flex items-center justify-center gap-3.5 w-full h-12 bg-gray-50 rounded-xl transition-colors duration-200 hover:bg-gray-100"
                     title={`Browse ${category.name} Figma designs`}
+                    className="flex items-center justify-center gap-3.5 shrink-0 w-full h-12 bg-gray-50 px-3.5 rounded-xl truncate transition-colors duration-200 hover:bg-gray-100"
                   >
                     <category.icon
                       className="w-6 h-6"
