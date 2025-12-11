@@ -40,8 +40,11 @@ const Header = () => {
       )}
     >
       {/* Top */}
-      <header className="container">
-        <div className="flex items-center justify-between">
+      <header className="container" role="banner">
+        <nav
+          aria-label="Main navigation"
+          className="flex items-center justify-between"
+        >
           {/* Logo */}
           <Logo />
 
@@ -49,21 +52,25 @@ const Header = () => {
           <Link
             href="/saved"
             className="flex items-center gap-3 h-11 bg-white px-4 rounded-full transition-colors duration-200 hover:text-violet-500"
+            aria-label={`Saved Designs${
+              savedCount > 0 ? `, ${savedCount} items` : ""
+            }`}
           >
             <Heart
               strokeWidth={1.5}
               className={savedCount > 0 ? "text-violet-500" : ""}
+              aria-hidden="true"
             />
             <span>Saved Designs{savedCount > 0 && ` (${savedCount})`}</span>
           </Link>
-        </div>
+        </nav>
       </header>
 
       {/* Detail */}
       {isHomePage && (
-        <div className="container space-y-3.5">
+        <section className="container space-y-3.5" aria-labelledby="hero-title">
           {/* Title */}
-          <h1 className="text-gray-800 font-medium text-2xl">
+          <h1 id="hero-title" className="text-gray-800 font-medium text-2xl">
             Free Figma Designs for Developers and Designers
           </h1>
 
@@ -71,8 +78,10 @@ const Header = () => {
           <p className="max-w-3xl text-gray-600 text-lg">
             Discover a curated library of free, professional Figma designs built
             to accelerate your workflow and enhance your creative output.
+            Download premium UI kits, website templates, mobile app designs,
+            icons, and illustrations.
           </p>
-        </div>
+        </section>
       )}
 
       <Suspense
