@@ -12,9 +12,10 @@ import { getDesignById } from "@/api/design.api";
 
 // Components
 import Breadcrumb from "@/components/ui/Breadcrumb";
+import SaveButton from "@/components/ui/SaveButton";
 
 // Icons
-import { Eye, Tag, Heart, Calendar, ExternalLink } from "lucide-react";
+import { Eye, Tag, Calendar, ExternalLink } from "lucide-react";
 
 const DesignDetail = async ({ params }) => {
   const { designId } = await params;
@@ -106,10 +107,7 @@ const DesignDetail = async ({ params }) => {
                   </a>
                 )}
 
-                <button className="flex items-center justify-center gap-2 w-full h-12 border border-gray-200 text-gray-700 rounded-xl transition-colors duration-200 hover:bg-gray-50">
-                  <Heart size={20} strokeWidth={1.5} />
-                  <span>Save Design</span>
-                </button>
+                <SaveButton design={design} />
               </div>
             </div>
 
