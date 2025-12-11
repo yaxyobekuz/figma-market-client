@@ -22,9 +22,13 @@ import { Heart } from "lucide-react";
 import Logo from "../ui/Logo";
 import SearchBox from "../ui/SearchBox";
 
+// Context
+import { useSavedDesigns } from "@/context/SavedDesignsContext";
+
 const Header = () => {
   const pathname = usePathname();
   const isHomePage = pathname === "/";
+  const { savedCount } = useSavedDesigns();
 
   return (
     <div
@@ -46,8 +50,11 @@ const Header = () => {
             href="/saved"
             className="flex items-center gap-3 h-11 bg-white px-4 rounded-full transition-colors duration-200 hover:text-violet-500"
           >
-            <Heart strokeWidth={1.5} />
-            <span>Saved Designs</span>
+            <Heart
+              strokeWidth={1.5}
+              className={savedCount > 0 ? "text-violet-500" : ""}
+            />
+            <span>Saved Designs{savedCount > 0 && ` (${savedCount})`}</span>
           </Link>
         </div>
       </header>
