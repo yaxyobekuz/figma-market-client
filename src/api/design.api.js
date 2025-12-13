@@ -91,14 +91,35 @@ const getDesignsByCategory = async (
     if (data.success) {
       return {
         designs: data.designs || [],
-        pagination: data.pagination || { total: 0, page: 1, pages: 1 },
+        pagination: data.pagination || {
+          currentPage: 1,
+          totalPages: 1,
+          totalCount: 0,
+          limit: 12,
+          hasNextPage: false,
+          hasPrevPage: false,
+          nextPage: null,
+          prevPage: null,
+        },
       };
     }
 
     throw new Error(data.message || "Failed to fetch designs");
   } catch (error) {
     console.error("Error fetching designs:", error);
-    return { designs: [], pagination: { total: 0, page: 1, pages: 1 } };
+    return {
+      designs: [],
+      pagination: {
+        currentPage: 1,
+        totalPages: 1,
+        totalCount: 0,
+        limit: 12,
+        hasNextPage: false,
+        hasPrevPage: false,
+        nextPage: null,
+        prevPage: null,
+      },
+    };
   }
 };
 
