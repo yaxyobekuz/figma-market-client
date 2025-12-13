@@ -1,3 +1,10 @@
+// SEO
+import {
+  siteConfig,
+  generateFAQSchema,
+  generateCollectionSchema,
+} from "@/lib/seo.config";
+
 // Next
 import Link from "next/link";
 
@@ -5,18 +12,11 @@ import Link from "next/link";
 import categories from "@/data/categories.data";
 
 // Components
-import DesignItem from "@/components/ui/DesignItem";
 import JsonLd from "@/components/seo/JsonLd";
+import DesignItem from "@/components/ui/DesignItem";
 
 // API
 import { getPopularDesigns } from "@/api/design.api";
-
-// SEO
-import {
-  siteConfig,
-  generateCollectionSchema,
-  generateFAQSchema,
-} from "@/lib/seo.config";
 
 // Page Metadata
 export const metadata = {
@@ -146,6 +146,16 @@ const Home = async () => {
               No designs available at the moment. Check back soon!
             </p>
           )}
+
+          {/* Load more link */}
+          <div className="flex justify-center w-full">
+            <Link
+              href="/explore/all"
+              className="flex items-center gap-3 h-11 bg-violet-500 text-white px-5 rounded-full transition-colors duration-200 hover:bg-violet-700"
+            >
+              Load more designs
+            </Link>
+          </div>
         </div>
       </section>
 

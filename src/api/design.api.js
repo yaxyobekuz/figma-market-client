@@ -3,11 +3,14 @@ import { getApiFullUrl } from ".";
 /**
  * Fetch popular designs from API
  */
-const getPopularDesigns = async () => {
+const getPopularDesigns = async (limit = 40) => {
   try {
-    const response = await fetch(getApiFullUrl(`/designs/popular`), {
-      next: { revalidate: 60 }, // Revalidate every 60 seconds
-    });
+    const response = await fetch(
+      getApiFullUrl(`/designs/popular?limit=${limit}`),
+      {
+        next: { revalidate: 60 }, // Revalidate every 60 seconds
+      }
+    );
 
     if (!response.ok) {
       throw new Error(`Failed to fetch popular designs: ${response.status}`);
