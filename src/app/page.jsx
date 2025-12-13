@@ -147,13 +147,13 @@ const Home = async () => {
             </p>
           )}
 
-          {/* Load more link */}
+          {/* Show more link */}
           <div className="flex justify-center w-full">
             <Link
               href="/explore/all"
               className="flex items-center gap-3 h-11 bg-violet-500 text-white px-5 rounded-full transition-colors duration-200 hover:bg-violet-700"
             >
-              Load more designs
+              Show more designs
             </Link>
           </div>
         </div>

@@ -51,7 +51,7 @@ const Header = () => {
           {/* Saved */}
           <Link
             href="/saved"
-            className="flex items-center gap-3 h-11 bg-white px-4 rounded-full transition-colors duration-200 hover:text-violet-500"
+            className="flex items-center justify-center gap-3 w-11 h-11 bg-white  rounded-full transition-colors duration-200 hover:text-violet-500 sm:w-auto sm:px-4"
             aria-label={`Saved Designs${
               savedCount > 0 ? `, ${savedCount} items` : ""
             }`}
@@ -61,7 +61,9 @@ const Header = () => {
               className={savedCount > 0 ? "text-violet-500" : ""}
               aria-hidden="true"
             />
-            <span>Saved Designs{savedCount > 0 && ` (${savedCount})`}</span>
+            <span className="hidden sm:inline">
+              Saved Designs{savedCount > 0 && ` (${savedCount})`}
+            </span>
           </Link>
         </nav>
       </header>
