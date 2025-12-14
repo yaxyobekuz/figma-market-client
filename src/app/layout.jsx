@@ -16,6 +16,7 @@ import NextTopLoader from "nextjs-toploader";
 import JsonLd from "@/components/seo/JsonLd";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 
 // Context
 import { SavedDesignsProvider } from "@/context/SavedDesignsContext";
@@ -107,6 +108,7 @@ const RootLayout = ({ children }) => {
   return (
     <html lang="en" className={rubik.variable}>
       <head>
+        <GoogleAnalytics />
         <JsonLd data={websiteSchema} />
         <JsonLd data={organizationSchema} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
