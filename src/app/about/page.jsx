@@ -207,7 +207,7 @@ const AboutPage = () => {
               {stats.map((stat, index) => (
                 <div
                   key={index}
-                  className="text-center p-6 rounded-2xl bg-gray-50 hover:bg-violet-50 transition-colors duration-300"
+                  className="text-center p-6 rounded-2xl bg-gray-50 hover:bg-violet-50 transition-colors duration-200"
                 >
                   <div className="inline-flex items-center justify-center w-12 h-12 bg-violet-100 text-violet-600 rounded-xl mb-4">
                     <stat.icon className="w-6 h-6" />
@@ -295,7 +295,7 @@ const AboutPage = () => {
               {features.map((feature, index) => (
                 <div
                   key={index}
-                  className="p-6 rounded-2xl border border-gray-100 hover:border-violet-200 hover:shadow-lg transition-all duration-300"
+                  className="p-6 rounded-2xl border border-gray-100 hover:border-violet-200 hover:shadow-lg transition-all duration-200"
                 >
                   <div className="inline-flex items-center justify-center w-12 h-12 bg-violet-100 text-violet-600 rounded-xl mb-4">
                     <feature.icon className="w-6 h-6" />
