@@ -197,7 +197,7 @@ const TermsPage = () => {
 
       <main className="min-h-screen">
         {/* Hero Section */}
-        <section className="py-16 md:py-20 bg-gradient-to-b from-violet-50 to-white">
+        <section className="py-16 md:py-20 bg-gradient-to-b from-gray-50">
           <div className="container">
             <div className="max-w-3xl mx-auto text-center space-y-6">
               <span className="inline-block px-4 py-2 bg-violet-100 text-violet-700 rounded-full text-sm font-medium">
