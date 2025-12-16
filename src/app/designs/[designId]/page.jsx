@@ -38,8 +38,8 @@ export async function generateMetadata({ params }) {
   }
 
   const category = categories.find((cat) => cat.slug === design.category);
-  const imageUrl = design.previewImages?.[0]?.path
-    ? getApiImageUrl(design.previewImages[0].path)
+  const imageUrl = design.thumbnail?.path
+    ? getApiImageUrl(design.thumbnail?.path)
     : siteConfig.ogImage;
 
   const keywords = [
@@ -48,6 +48,7 @@ export async function generateMetadata({ params }) {
     "Figma template",
     "free design",
     ...(design.tags || []),
+    "Figma Market",
   ];
 
   return {
