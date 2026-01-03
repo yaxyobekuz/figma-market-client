@@ -21,9 +21,10 @@ import { getDesignById } from "@/api/design.api";
 import JsonLd from "@/components/seo/JsonLd";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import SaveButton from "@/components/ui/SaveButton";
+import ViewDesignButton from "@/components/ui/ViewDesignButton";
 
 // Icons
-import { Eye, Tag, Calendar, ExternalLink } from "lucide-react";
+import { Eye, Tag, Calendar } from "lucide-react";
 
 // Dynamic Metadata Generation
 export async function generateMetadata({ params }) {
@@ -192,22 +193,7 @@ const DesignDetail = async ({ params }) => {
 
               {/* Action Buttons */}
               <div className="space-y-3">
-                {design.url && (
-                  <a
-                    target="_blank"
-                    href={design.url}
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 w-full h-12 bg-violet-500 text-white rounded-xl hover:bg-violet-700 transition-colors duration-200"
-                    aria-label={`View ${design.title} on Figma`}
-                  >
-                    <ExternalLink
-                      size={20}
-                      strokeWidth={1.5}
-                      aria-hidden="true"
-                    />
-                    <span>View Design</span>
-                  </a>
-                )}
+                <ViewDesignButton design={design} />
 
                 <SaveButton design={design} />
               </div>
