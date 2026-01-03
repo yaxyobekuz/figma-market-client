@@ -123,4 +123,8 @@ const getDesignsByCategory = async (
   }
 };
 
-export { getPopularDesigns, getDesignById, getDesignsByCategory };
+export {
+  getDesignById,
+  getPopularDesigns,
+  getDesignsByCategory,
+};
