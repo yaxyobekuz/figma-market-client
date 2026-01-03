@@ -127,7 +127,7 @@ const Home = async () => {
       </section>
 
       {/* Popular Designs Section */}
-      <section className="py-8" aria-labelledby="popular-heading">
+      <section className="pt-8 pb-12" aria-labelledby="popular-heading">
         <div className="container space-y-5">
           {/* Title */}
           <h2 id="popular-heading" className="text-2xl font-medium">
@@ -159,7 +159,7 @@ const Home = async () => {
         </div>
       </section>
 
-      {/* FAQ Section (Hidden visually but good for SEO) */}
+      {/* FAQ Section */}
       <section className="py-12 bg-gray-50" aria-labelledby="faq-heading">
         <div className="container space-y-8">
           <h2 id="faq-heading" className="text-2xl font-medium text-center">

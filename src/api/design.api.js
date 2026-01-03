@@ -3,7 +3,7 @@ import { getApiFullUrl } from ".";
 /**
  * Fetch popular designs from API
  */
-const getPopularDesigns = async (limit = 40) => {
+const getPopularDesigns = async (limit = 39) => {
   try {
     const response = await fetch(
       getApiFullUrl(`/designs/popular?limit=${limit}`),

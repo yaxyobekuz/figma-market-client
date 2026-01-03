@@ -136,7 +136,7 @@ const Footer = () => {
           {/* Copyright */}
           <p className="text-sm text-gray-400">
             <span itemScope itemType="https://schema.org/Organization">
-              <span itemProp="name">© 2025 Figma Market</span>. All rights
+              <span itemProp="name">© 2025 - 2026 Figma Market</span>. All rights
               reserved.
             </span>
           </p>
@@ -158,7 +158,7 @@ const Footer = () => {
             <a
               target="_blank"
               rel="noopener noreferrer"
-              href="https://instagram.com/figmamarket"
+              href="https://instagram.com/figma_market"
               className="transition-colors duration-200 hover:text-violet-500"
               aria-label="Follow us on Instagram"
             >
