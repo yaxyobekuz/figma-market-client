@@ -81,19 +81,16 @@ export async function generateMetadata({ params, searchParams }) {
       description,
       images: [siteConfig.ogImage],
     },
-    alternates: {
-      canonical: canonicalUrl,
-    },
-    robots:
-      currentPage > 1
-        ? {
-            index: false,
-            follow: true,
-          }
-        : {
-            index: true,
-            follow: true,
-          },
+    alternates: { canonical: canonicalUrl },
+    robots: searchQuery?.trim()
+      ? {
+          index: false,
+          follow: true,
+        }
+      : {
+          index: true,
+          follow: true,
+        },
   };
 }
 
