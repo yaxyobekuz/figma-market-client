@@ -42,10 +42,10 @@ const DesignItem = ({ className, data }) => {
         <Image
           width={400}
           height={300}
-          src={thumbnailUrl}
-          alt={`${title} - Free ${category || "design"} Figma template`}
-          className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
           loading="lazy"
+          src={thumbnailUrl}
+          alt={title || "Design Thumbnail"}
+          className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
 
         {/* Toggle Like button */}
