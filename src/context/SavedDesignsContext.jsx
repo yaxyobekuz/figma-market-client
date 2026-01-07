@@ -1,7 +1,14 @@
 "use client";
 
 // React
-import { createContext, useContext, useState, useEffect } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+} from "react";
 
 const SavedDesignsContext = createContext(null);
 
@@ -33,12 +40,15 @@ export const SavedDesignsProvider = ({ children }) => {
   }, [savedDesigns, isLoaded]);
 
   // Check if a design is saved
-  const isDesignSaved = (designId) => {
-    return savedDesigns.some((design) => design._id === designId);
-  };
+  const isDesignSaved = useCallback(
+    (designId) => {
+      return savedDesigns.some((design) => design._id === designId);
+    },
+    [savedDesigns]
+  );
 
   // Toggle save/unsave a design
-  const toggleSaveDesign = (design) => {
+  const toggleSaveDesign = useCallback((design) => {
     if (!design || !design._id) return;
 
     setSavedDesigns((prev) => {
@@ -49,27 +59,38 @@ export const SavedDesignsProvider = ({ children }) => {
         return [...prev, design];
       }
     });
-  };
+  }, []);
 
   // Remove a design from saved
-  const removeDesign = (designId) => {
+  const removeDesign = useCallback((designId) => {
     setSavedDesigns((prev) => prev.filter((d) => d._id !== designId));
-  };
+  }, []);
 
   // Get saved designs count
   const savedCount = savedDesigns.length;
 
+  // Memoize the context value to prevent unnecessary re-renders
+  const value = useMemo(
+    () => ({
+      savedDesigns,
+      savedCount,
+      isLoaded,
+      isDesignSaved,
+      toggleSaveDesign,
+      removeDesign,
+    }),
+    [
+      savedDesigns,
+      savedCount,
+      isLoaded,
+      isDesignSaved,
+      toggleSaveDesign,
+      removeDesign,
+    ]
+  );
+
   return (
-    <SavedDesignsContext.Provider
-      value={{
-        savedDesigns,
-        savedCount,
-        isLoaded,
-        isDesignSaved,
-        toggleSaveDesign,
-        removeDesign,
-      }}
-    >
+    <SavedDesignsContext.Provider value={value}>
       {children}
     </SavedDesignsContext.Provider>
   );
