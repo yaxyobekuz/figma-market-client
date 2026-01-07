@@ -123,8 +123,38 @@ const getDesignsByCategory = async (
   }
 };
 
+/**
+ * Fetch related designs by design ID from API
+ */
+const getRelatedDesigns = async (id, limit = 6) => {
+  try {
+    const response = await fetch(
+      getApiFullUrl(`/designs/${id}/related?limit=${limit}`),
+      {
+        next: { revalidate: 60 },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch related designs: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    if (data.success) {
+      return data.designs || [];
+    }
+
+    throw new Error(data.message || "Failed to fetch related designs");
+  } catch (error) {
+    console.error("Error fetching related designs:", error);
+    return [];
+  }
+};
+
 export {
   getDesignById,
   getPopularDesigns,
+  getRelatedDesigns,
   getDesignsByCategory,
 };
