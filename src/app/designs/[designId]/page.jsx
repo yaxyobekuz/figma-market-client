@@ -21,6 +21,7 @@ import { getDesignById } from "@/api/design.api";
 import JsonLd from "@/components/seo/JsonLd";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import SaveButton from "@/components/ui/SaveButton";
+import RelatedDesigns from "@/components/ui/RelatedDesigns";
 import ViewDesignButton from "@/components/ui/ViewDesignButton";
 
 // Icons
@@ -253,6 +254,9 @@ const DesignDetail = async ({ params }) => {
             </div>
           </aside>
         </article>
+
+        {/* Related Designs */}
+        <RelatedDesigns designId={designId} />
       </div>
     </div>
   );
