@@ -1,4 +1,4 @@
-import { IMAGE_HOSTING_URL } from "@/lib/constants";
+import { IMAGE_HOSTING_URL, API_URL } from "@/lib/constants";
 
 /**
  * Get full image URL
