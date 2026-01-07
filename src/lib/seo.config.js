@@ -256,7 +256,7 @@ export function generateDesignSchema(design, category) {
     description: design.description,
     url: `${siteConfig.url}/designs/${design._id}`,
     image: design.previewImages?.[0]?.path
-      ? `${process.env.NEXT_PUBLIC_API_URL?.replace("/api", "")}${
+      ? `${process.env.NEXT_PUBLIC_IMAGE_HOSTING_URL}${
           design.previewImages[0].path
         }`
       : siteConfig.ogImage,

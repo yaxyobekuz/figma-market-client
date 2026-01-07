@@ -1,5 +1,7 @@
 export const API_URL =
   process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api";
+export const IMAGE_HOSTING_URL =
+  process.env.NEXT_PUBLIC_IMAGE_HOSTING_URL || "http://localhost:8080";
 export const STORAGE_URL = process.env.NEXT_PUBLIC_STORAGE_URL || "";
 
 export const ROUTES = {
