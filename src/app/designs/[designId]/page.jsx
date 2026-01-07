@@ -21,6 +21,7 @@ import { getDesignById } from "@/api/design.api";
 import JsonLd from "@/components/seo/JsonLd";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import SaveButton from "@/components/ui/SaveButton";
+import ViewTracker from "@/components/ui/ViewTracker";
 import RelatedDesigns from "@/components/ui/RelatedDesigns";
 import ViewDesignButton from "@/components/ui/ViewDesignButton";
 
@@ -125,6 +126,9 @@ const DesignDetail = async ({ params }) => {
 
   return (
     <div className="pt-8 pb-12">
+      {/* Track user views */}
+      <ViewTracker designId={designId} />
+
       {/* JSON-LD Structured Data */}
       <JsonLd data={designSchema} />
       <JsonLd data={breadcrumbSchema} />
