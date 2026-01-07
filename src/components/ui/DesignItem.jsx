@@ -14,7 +14,7 @@ import LikeButton from "./LikeButton";
 // Api
 import { getApiImageUrl } from "@/api";
 
-const DesignItem = ({ className, data }) => {
+const DesignItem = ({ className, data, priority = false }) => {
   const {
     _id: id,
     title,
@@ -42,9 +42,10 @@ const DesignItem = ({ className, data }) => {
         <Image
           width={400}
           height={300}
-          loading="lazy"
           src={thumbnailUrl}
+          priority={priority}
           alt={title || "Design Thumbnail"}
+          loading={priority ? undefined : "lazy"}
           className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
 

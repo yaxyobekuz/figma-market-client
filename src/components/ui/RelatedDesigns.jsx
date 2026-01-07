@@ -112,8 +112,8 @@ const RelatedDesigns = ({ designId }) => {
 
       {/* Designs */}
       <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {designs.map((design) => (
-          <DesignItem key={design._id} data={design} />
+        {designs.map((design, index) => (
+          <DesignItem key={design._id} data={design} priority={index < 4} />
         ))}
       </ul>
 

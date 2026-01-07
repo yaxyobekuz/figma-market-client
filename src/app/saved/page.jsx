@@ -43,8 +43,8 @@ const Saved = () => {
             aria-label="Saved designs list"
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
           >
-            {savedDesigns.map((design) => (
-              <DesignItem key={design._id} data={design} />
+            {savedDesigns.map((design, index) => (
+              <DesignItem key={design._id} data={design} priority={index < 4} />
             ))}
           </ul>
         ) : (

@@ -148,6 +148,7 @@ const ExplorePage = async ({ params, searchParams }) => {
                 <li key={category.slug} className="shrink-0">
                   <Link
                     href={href}
+                    rel={searchQuery ? "nofollow" : undefined}
                     className={cn(
                       "inline-block px-3 transition-colors duration-200",
                       isActive ? "text-violet-500" : "hover:text-violet-500"
@@ -207,8 +208,8 @@ const ExplorePage = async ({ params, searchParams }) => {
                 className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
                 role="list"
               >
-                {designs.map((design) => (
-                  <DesignItem key={design._id} data={design} />
+                {designs.map((design, index) => (
+                  <DesignItem key={design._id} data={design} priority={index < 4} />
                 ))}
               </ul>
 
