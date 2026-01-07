@@ -1,8 +1,33 @@
 "use server";
 
 /**
+ * Track view for a design (Server Action)
+ * This runs on the server and proxies to the backend API
+ * Only called after client-side bot detection passes
+ */
+export async function trackDesignView(designId) {
+  try {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
+    const response = await fetch(`${apiUrl}/designs/${designId}/view`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (!response.ok) return { success: false };
+
+    const data = await response.json();
+    return { success: data.success };
+  } catch (error) {
+    console.error("Error tracking view:", error);
+    return { success: false };
+  }
+}
+
+/**
  * Track URL click for a design (Server Action)
  * This runs on the server, hiding the API endpoint from client
+ * Only called after client-side bot detection passes
  */
 export async function trackDesignClick(designId) {
   try {
