@@ -269,3 +269,38 @@ export const markAsViewed = (designId) => {
     // Fail silently
   }
 };
+
+/**
+ * Check if this design URL was already clicked in this session
+ * Prevents duplicate click counts from multiple clicks
+ */
+export const hasClickedInSession = (designId) => {
+  if (typeof window === "undefined") return true;
+
+  try {
+    const CLICKED_KEY = "figma_market_clicked_designs";
+    const clicked = JSON.parse(sessionStorage.getItem(CLICKED_KEY) || "[]");
+    return clicked.includes(designId);
+  } catch {
+    return false;
+  }
+};
+
+/**
+ * Mark a design as clicked in this session
+ */
+export const markAsClicked = (designId) => {
+  if (typeof window === "undefined") return;
+
+  try {
+    const CLICKED_KEY = "figma_market_clicked_designs";
+    const clicked = JSON.parse(sessionStorage.getItem(CLICKED_KEY) || "[]");
+
+    if (!clicked.includes(designId)) {
+      clicked.push(designId);
+      sessionStorage.setItem(CLICKED_KEY, JSON.stringify(clicked));
+    }
+  } catch {
+    // Fail silently
+  }
+};

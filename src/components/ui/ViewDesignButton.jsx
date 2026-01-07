@@ -1,10 +1,14 @@
 "use client";
 
+// Utils
+import {
+  markAsClicked,
+  isLikelyRealUser,
+  hasClickedInSession,
+} from "@/lib/bot-detection";
+
 // Icons
 import { ExternalLink } from "lucide-react";
-
-// Utils
-import { isLikelyRealUser } from "@/lib/bot-detection";
 
 // Server Actions
 import { trackDesignClick } from "@/app/actions/design.actions";
@@ -12,9 +16,27 @@ import { trackDesignClick } from "@/app/actions/design.actions";
 const ViewDesignButton = ({ design }) => {
   // Track the click in background (don't block navigation)
   const handleClick = async () => {
-    if (isLikelyRealUser()) {
-      trackDesignClick(design._id || design.id);
+    const designId = design._id || design.id;
+
+    // Check if already clicked in this session
+    if (hasClickedInSession(designId)) {
+      console.log(
+        "[ViewDesignButton] Already clicked in this session, skipping tracking"
+      );
+      return;
     }
+
+    // Quick bot check before tracking
+    if (!isLikelyRealUser()) {
+      console.log("[ViewDesignButton] Bot detected, skipping click tracking");
+      return;
+    }
+
+    // Track the click
+    trackDesignClick(designId);
+
+    // Mark as clicked in session to prevent duplicate tracking
+    markAsClicked(designId);
   };
 
   if (!design.url) return null;
