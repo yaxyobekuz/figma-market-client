@@ -3,13 +3,18 @@
 // Icons
 import { ExternalLink } from "lucide-react";
 
+// Utils
+import { isLikelyRealUser } from "@/lib/bot-detection";
+
 // Server Actions
 import { trackDesignClick } from "@/app/actions/design.actions";
 
 const ViewDesignButton = ({ design }) => {
   // Track the click in background (don't block navigation)
   const handleClick = async () => {
-    trackDesignClick(design._id || design.id);
+    if (isLikelyRealUser()) {
+      trackDesignClick(design._id || design.id);
+    }
   };
 
   if (!design.url) return null;
