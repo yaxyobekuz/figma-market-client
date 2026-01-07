@@ -12,13 +12,13 @@ export default async function sitemap() {
     {
       url: baseUrl,
       lastModified: currentDate,
-      changeFrequency: "daily",
+      changeFrequency: "weekly",
       priority: 1.0,
     },
     {
       url: `${baseUrl}/explore/all`,
       lastModified: currentDate,
-      changeFrequency: "daily",
+      changeFrequency: "weekly",
       priority: 0.9,
     },
     {
@@ -51,7 +51,7 @@ export default async function sitemap() {
   const categoryPages = categories.map((category) => ({
     url: `${baseUrl}/explore/${category.slug}`,
     lastModified: currentDate,
-    changeFrequency: "daily",
+    changeFrequency: "weekly",
     priority: category.slug === "all" ? 0.9 : 0.8,
   }));
 
