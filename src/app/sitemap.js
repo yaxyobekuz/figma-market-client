@@ -45,6 +45,12 @@ export default async function sitemap() {
       changeFrequency: "yearly",
       priority: 0.4,
     },
+    {
+      url: `${baseUrl}/blog`,
+      lastModified: currentDate,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
   ];
 
   // Category pages

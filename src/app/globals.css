@@ -12,4 +12,32 @@
   .container {
     @apply max-w-7xl w-full mx-auto px-4;
   }
+
+  .blog-content {
+    h1,
+    h2,
+    h3 {
+      @apply font-semibold;
+    }
+
+    strong {
+      @apply font-medium sm:font-semibold;
+    }
+
+    h2 {
+      @apply text-xl sm:text-2xl md:text-3xl;
+    }
+
+    h3 {
+      @apply text-lg sm:text-xl md:text-2xl;
+    }
+
+    ul {
+      @apply list-disc pl-5;
+    }
+
+    a {
+      @apply not-italic text-indigo-600 transition-colors hover:text-indigo-800;
+    }
+  }
 }
