@@ -1,5 +1,6 @@
 "use client";
 
+import categories from "@/data/categories.data";
 // Components
 import Logo from "../ui/Logo";
 
@@ -20,7 +21,7 @@ const Footer = () => {
       aria-label="Site footer"
       className={cn(
         "py-12",
-        isHomePage ? "bg-gradient-to-t from-gray-100" : "bg-gray-50"
+        isHomePage ? "bg-gradient-to-t from-gray-100" : "bg-gray-50",
       )}
     >
       <div className="container">
@@ -43,38 +44,16 @@ const Footer = () => {
 
             {/* List */}
             <ul className="space-y-2 text-gray-500">
-              <li>
-                <Link
-                  href="/explore/all"
-                  className="transition-colors duration-200 hover:text-violet-500"
-                >
-                  Explore Designs
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/explore/web-site"
-                  className="transition-colors duration-200 hover:text-violet-500"
-                >
-                  Website Templates
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/explore/mobile-app"
-                  className="transition-colors duration-200 hover:text-violet-500"
-                >
-                  Mobile App UI
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/explore/ui-kit"
-                  className="transition-colors duration-200 hover:text-violet-500"
-                >
-                  UI Kits
-                </Link>
-              </li>
+              {categories.map((category, index) => (
+                <li key={category.slug}>
+                  <Link
+                    href={`/explore/${category.slug}`}
+                    className="transition-colors duration-200 hover:text-violet-500"
+                  >
+                    {category.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </nav>
 
@@ -93,6 +72,16 @@ const Footer = () => {
                   About Us
                 </Link>
               </li>
+
+              <li>
+                <Link
+                  href="/blog"
+                  className="transition-colors duration-200 hover:text-violet-500"
+                >
+                  Blog
+                </Link>
+              </li>
+
               <li>
                 <Link
                   href="/contact"
@@ -119,6 +108,7 @@ const Footer = () => {
                   Privacy Policy
                 </Link>
               </li>
+
               <li>
                 <Link
                   href="/terms"
@@ -136,8 +126,8 @@ const Footer = () => {
           {/* Copyright */}
           <p className="text-sm text-gray-400">
             <span itemScope itemType="https://schema.org/Organization">
-              <span itemProp="name">© 2025 - 2026 Figma Market</span>. All rights
-              reserved.
+              <span itemProp="name">© 2025 - 2026 Figma Market</span>. All
+              rights reserved.
             </span>
           </p>
 
