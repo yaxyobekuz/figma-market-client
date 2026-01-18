@@ -14,9 +14,11 @@ import categories from "@/data/categories.data";
 // Components
 import JsonLd from "@/components/seo/JsonLd";
 import DesignItem from "@/components/ui/DesignItem";
+import BlogItem from "@/components/ui/BlogItem";
 
 // API
 import { getPopularDesigns } from "@/api/design.api";
+import { getRecentBlogs } from "@/api/blog.api";
 
 // Page Metadata
 export const metadata = {
@@ -76,8 +78,11 @@ const homeFAQs = [
 ];
 
 const Home = async () => {
-  // Fetch popular designs
-  const designs = await getPopularDesigns();
+  // Fetch popular designs and recent blogs
+  const [designs, blogs] = await Promise.all([
+    getPopularDesigns(),
+    getRecentBlogs(6),
+  ]);
 
   // Generate schemas for SEO
   const collectionSchema = generateCollectionSchema(
@@ -158,6 +163,37 @@ const Home = async () => {
           </div>
         </div>
       </section>
+
+      {/* Blog Section */}
+      {blogs.length > 0 && (
+        <section className="py-12 bg-gray-50" aria-labelledby="blog-heading">
+          <div className="container space-y-5">
+            {/* Title */}
+            <div className="flex items-center justify-between">
+              <h2 id="blog-heading" className="text-2xl font-medium">
+                Latest from Blog
+              </h2>
+            </div>
+
+            {/* Blog list */}
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {blogs.map((blog, index) => (
+                <BlogItem key={blog._id} data={blog} priority={index < 2} />
+              ))}
+            </ul>
+
+            {/* Show more link */}
+            <div className="flex justify-center w-full pt-4">
+              <Link
+                href="/blog"
+                className="flex items-center gap-3 h-11 bg-violet-500 text-white px-5 rounded-full transition-colors duration-200 hover:bg-violet-700"
+              >
+                View all articles
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* FAQ Section */}
       <section className="py-12 bg-gray-50" aria-labelledby="faq-heading">
