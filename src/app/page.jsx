@@ -9,16 +9,17 @@ import {
 import Link from "next/link";
 
 // Data
+import { homeFaq } from "@/data/faq.data";
 import categories from "@/data/categories.data";
 
 // Components
 import JsonLd from "@/components/seo/JsonLd";
-import DesignItem from "@/components/ui/DesignItem";
 import BlogItem from "@/components/ui/BlogItem";
+import DesignItem from "@/components/ui/DesignItem";
 
 // API
-import { getPopularDesigns } from "@/api/design.api";
 import { getRecentBlogs } from "@/api/blog.api";
+import { getPopularDesigns } from "@/api/design.api";
 
 // Page Metadata
 export const metadata = {
@@ -53,30 +54,6 @@ export const metadata = {
   },
 };
 
-// FAQ data for SEO
-const homeFAQs = [
-  {
-    question: "What is Figma Market?",
-    answer:
-      "Figma Market is a platform offering thousands of free premium Figma design resources including UI kits, web templates, mobile app designs, icons, illustrations, and 3D assets for designers and developers.",
-  },
-  {
-    question: "Are the Figma resources free to download?",
-    answer:
-      "Yes, all design resources on Figma Market are completely free to download and use in your personal and commercial projects.",
-  },
-  {
-    question: "What types of design resources are available?",
-    answer:
-      "We offer web site templates, mobile app UI kits, UI component libraries, icon sets, illustrations, and 3D assets - all compatible with Figma.",
-  },
-  {
-    question: "How do I use the downloaded Figma files?",
-    answer:
-      "Simply download the Figma file and open it in Figma (desktop app or web). You can then customize the designs according to your needs.",
-  },
-];
-
 const Home = async () => {
   // Fetch popular designs and recent blogs
   const [designs, blogs] = await Promise.all([
@@ -88,9 +65,9 @@ const Home = async () => {
   const collectionSchema = generateCollectionSchema(
     designs,
     "Popular Figma Design Resources",
-    "Browse the most popular free Figma design resources"
+    "Browse the most popular free Figma design resources",
   );
-  const faqSchema = generateFAQSchema(homeFAQs);
+  const faqSchema = generateFAQSchema(homeFaq);
 
   return (
     <>
@@ -143,7 +120,11 @@ const Home = async () => {
           {designs.length > 0 ? (
             <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {designs.map((design, index) => (
-                <DesignItem key={design._id} data={design} priority={index < 4} />
+                <DesignItem
+                  key={design._id}
+                  data={design}
+                  priority={index < 4}
+                />
               ))}
             </ul>
           ) : (
@@ -166,7 +147,7 @@ const Home = async () => {
 
       {/* Blog Section */}
       {blogs.length > 0 && (
-        <section className="py-12 bg-gray-50" aria-labelledby="blog-heading">
+        <section className="py-12" aria-labelledby="blog-heading">
           <div className="container space-y-5">
             {/* Title */}
             <div className="flex items-center justify-between">
@@ -202,7 +183,7 @@ const Home = async () => {
             Frequently Asked Questions
           </h2>
           <dl className="max-w-3xl mx-auto space-y-6">
-            {homeFAQs.map((faq, index) => (
+            {homeFaq.map((faq, index) => (
               <div key={index} className="space-y-2">
                 <dt className="font-semibold text-lg">{faq.question}</dt>
                 <dd className="text-gray-600">{faq.answer}</dd>
