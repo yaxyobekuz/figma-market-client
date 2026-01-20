@@ -61,7 +61,7 @@ const BlogItem = ({ className, data, priority = false }) => {
         </h3>
 
         {/* Description */}
-        <p className="text-sm text-gray-500 line-clamp-2">{description}</p>
+        <p className="text-sm text-gray-500 line-clamp-3">{description}</p>
       </div>
 
       {/* Link */}
