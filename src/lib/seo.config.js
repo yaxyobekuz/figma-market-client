@@ -60,6 +60,19 @@ export const categorySEO = {
       "responsive design",
     ],
   },
+  dashboard: {
+    title: "Free Dashboard & Admin Panel Figma Templates",
+    description:
+      "Download high-quality free Figma dashboard templates, admin panels, and data visualization user interfaces. Perfect for web apps and SaaS projects.",
+    keywords: [
+      "Figma dashboard templates",
+      "admin panel UI",
+      "dashboard design",
+      "SaaS UI kit",
+      "data visualization",
+      "dashboard UI Figma",
+    ],
+  },
   "mobile-app": {
     title: "Free Mobile App Figma UI Kits & Templates",
     description:

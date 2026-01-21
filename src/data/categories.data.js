@@ -7,6 +7,7 @@ import {
   Smartphone,
   Grid2X2Icon,
   LineSquiggle,
+  LayoutDashboard,
 } from "lucide-react";
 
 const categories = [
@@ -23,6 +24,13 @@ const categories = [
     label: "Website Designs",
     slug: "web-site",
     href: "/explore/web-site",
+  },
+  {
+    icon: LayoutDashboard,
+    name: "Dashboard",
+    label: "Dashboard Designs",
+    slug: "dashboard",
+    href: "/explore/dashboard",
   },
   {
     icon: Smartphone,
