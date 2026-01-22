@@ -37,7 +37,7 @@ const DesignItem = ({ className, data, priority = false }) => {
       <meta itemProp="image" content={thumbnailUrl} />
 
       {/* Top */}
-      <div className="relative w-full h-auto aspect-[4/3] bg-gray-100 overflow-hidden mb-3.5 rounded-3xl">
+      <div className="relative w-full h-auto aspect-[4/3] bg-gray-100 overflow-hidden mb-3.5 rounded-3xl border">
         {/* Image */}
         <Image
           width={400}

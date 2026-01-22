@@ -152,9 +152,44 @@ const getRelatedDesigns = async (id, limit = 6) => {
   }
 };
 
+/**
+ * Fetch newest designs from API
+ */
+const getNewestDesigns = async (limit = 6) => {
+  try {
+    const params = new URLSearchParams({
+      sortBy: "newest",
+      limit: limit.toString(),
+    });
+
+    const response = await fetch(
+      getApiFullUrl(`/designs?${params.toString()}`),
+      {
+        next: { revalidate: 60 },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch newest designs: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    if (data.success) {
+      return data.designs || [];
+    }
+
+    throw new Error(data.message || "Failed to fetch newest designs");
+  } catch (error) {
+    console.error("Error fetching newest designs:", error);
+    return [];
+  }
+};
+
 export {
   getDesignById,
   getPopularDesigns,
   getRelatedDesigns,
   getDesignsByCategory,
+  getNewestDesigns,
 };

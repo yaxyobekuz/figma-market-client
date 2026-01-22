@@ -19,7 +19,7 @@ import DesignItem from "@/components/ui/DesignItem";
 
 // API
 import { getRecentBlogs } from "@/api/blog.api";
-import { getPopularDesigns } from "@/api/design.api";
+import { getPopularDesigns, getNewestDesigns } from "@/api/design.api";
 
 // Page Metadata
 export const metadata = {
@@ -55,15 +55,16 @@ export const metadata = {
 };
 
 const Home = async () => {
-  // Fetch popular designs and recent blogs
-  const [designs, blogs] = await Promise.all([
+  // Fetch popular designs, newest designs and recent blogs
+  const [popularDesigns, newestDesigns, blogs] = await Promise.all([
     getPopularDesigns(),
+    getNewestDesigns(6),
     getRecentBlogs(6),
   ]);
 
   // Generate schemas for SEO
   const collectionSchema = generateCollectionSchema(
-    designs,
+    popularDesigns,
     "Popular Figma Design Resources",
     "Browse the most popular free Figma design resources",
   );
@@ -108,6 +109,33 @@ const Home = async () => {
         </div>
       </section>
 
+      {/* Newest Designs Section */}
+      <section className="pt-8 pb-12" aria-labelledby="newest-heading">
+        <div className="container space-y-5">
+          {/* Title */}
+          <h2 id="newest-heading" className="text-2xl font-medium">
+            Newest Designs
+          </h2>
+
+          {/* Newest designs list */}
+          {newestDesigns.length > 0 ? (
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {newestDesigns.map((design, index) => (
+                <DesignItem
+                  key={design._id}
+                  data={design}
+                  priority={index < 4}
+                />
+              ))}
+            </ul>
+          ) : (
+            <p className="text-gray-500 text-center py-12">
+              No new designs available at the moment.
+            </p>
+          )}
+        </div>
+      </section>
+
       {/* Popular Designs Section */}
       <section className="pt-8 pb-12" aria-labelledby="popular-heading">
         <div className="container space-y-5">
@@ -117,9 +145,9 @@ const Home = async () => {
           </h2>
 
           {/* Popular designs list */}
-          {designs.length > 0 ? (
+          {popularDesigns.length > 0 ? (
             <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {designs.map((design, index) => (
+              {popularDesigns.map((design, index) => (
                 <DesignItem
                   key={design._id}
                   data={design}
