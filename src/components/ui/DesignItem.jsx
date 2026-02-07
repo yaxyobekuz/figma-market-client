@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 // Utils
-import { cn } from "@/lib/utils";
+import { cn, generateSlug } from "@/lib/utils";
 
 // Icons
 import { Eye } from "lucide-react";
@@ -75,7 +75,7 @@ const DesignItem = ({ className, data, priority = false }) => {
       {/* Link */}
       <Link
         itemProp="url"
-        href={`/designs/${id}`}
+        href={`/designs/${id}-${generateSlug(title)}`}
         className="absolute inset-0 size-full rounded-3xl"
         aria-label={`View ${title} - Free Figma design template`}
       />

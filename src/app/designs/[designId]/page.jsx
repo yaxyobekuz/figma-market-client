@@ -8,7 +8,7 @@ import {
 // Next.js
 import Link from "next/link";
 import Image from "next/image";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 // Data
 import categories from "@/data/categories.data";
@@ -16,6 +16,9 @@ import categories from "@/data/categories.data";
 // API
 import { getApiImageUrl } from "@/api";
 import { getDesignById } from "@/api/design.api";
+
+// Utils
+import { extractDesignId, generateDesignUrl } from "@/lib/utils";
 
 // Components
 import JsonLd from "@/components/seo/JsonLd";
@@ -30,8 +33,17 @@ import { Eye, Tag, Calendar } from "lucide-react";
 
 // Dynamic Metadata Generation
 export async function generateMetadata({ params }) {
-  const { designId } = await params;
-  const design = await getDesignById(designId);
+  const { designId: rawDesignId } = await params;
+  const id = extractDesignId(rawDesignId);
+
+  if (!id) {
+    return {
+      title: "Design Not Found",
+      description: "The requested design could not be found.",
+    };
+  }
+
+  const design = await getDesignById(id);
 
   if (!design) {
     return {
@@ -40,6 +52,7 @@ export async function generateMetadata({ params }) {
     };
   }
 
+  const designUrl = generateDesignUrl(design._id, design.title);
   const category = categories.find((cat) => cat.slug === design.category);
   const imageUrl = design.thumbnail?.path
     ? getApiImageUrl(design.thumbnail?.path)
@@ -67,7 +80,7 @@ export async function generateMetadata({ params }) {
       description:
         design.description?.slice(0, 200) ||
         `Download ${design.title} for free from Figma Market.`,
-      url: `${siteConfig.url}/designs/${designId}`,
+      url: `${siteConfig.url}/designs/${designUrl}`,
       type: "article",
       images: [
         {
@@ -91,7 +104,7 @@ export async function generateMetadata({ params }) {
       images: [imageUrl],
     },
     alternates: {
-      canonical: `${siteConfig.url}/designs/${designId}`,
+      canonical: `${siteConfig.url}/designs/${designUrl}`,
     },
     other: {
       "article:published_time": design.createdAt,
@@ -103,7 +116,11 @@ export async function generateMetadata({ params }) {
 }
 
 const DesignDetail = async ({ params }) => {
-  const { designId } = await params;
+  const { designId: rawDesignId } = await params;
+  const designId = extractDesignId(rawDesignId);
+
+  // If invalid ID format, show 404 page
+  if (!designId) notFound();
 
   // Fetch design data
   const design = await getDesignById(designId);
@@ -111,13 +128,19 @@ const DesignDetail = async ({ params }) => {
   // If design not found, show 404 page
   if (!design) notFound();
 
+  // Redirect to correct slug URL if needed
+  const correctUrl = generateDesignUrl(design._id, design.title);
+  if (rawDesignId !== correctUrl) {
+    redirect(`/designs/${correctUrl}`);
+  }
+
   const category = categories.find((cat) => cat.slug === design.category);
 
   const breadcrumbItems = [
     { label: "Home", href: "/" },
     { label: "Explore", href: "/explore/all" },
     { label: category?.name || "Category", href: category?.href || "/" },
-    { label: design.title, href: `/designs/${designId}` },
+    { label: design.title, href: `/designs/${correctUrl}` },
   ];
 
   // Generate schemas
