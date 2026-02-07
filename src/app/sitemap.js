@@ -1,5 +1,6 @@
 // Sitemap generation for Next.js application
 import { siteConfig } from "@/lib/seo.config";
+import { generateDesignUrl } from "@/lib/utils";
 
 // Data
 import categories from "@/data/categories.data";
@@ -78,7 +79,7 @@ export default async function sitemap() {
   //     const designs = data.designs || data.data || [];
 
   //     designPages = designs.map((design) => ({
-  //       url: `${baseUrl}/designs/${design._id || design.id}`,
+  //       url: `${baseUrl}/designs/${generateDesignUrl(design._id || design.id, design.title)}`,
   //       lastModified: new Date(
   //         design.updatedAt || design.updated_at || currentDate
   //       ),

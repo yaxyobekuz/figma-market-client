@@ -1,3 +1,5 @@
+import { generateDesignUrl } from "@/lib/utils";
+
 // SEO Configuration
 export const siteConfig = {
   name: "Figma Market",
@@ -267,7 +269,7 @@ export function generateDesignSchema(design, category) {
     "@type": "CreativeWork",
     name: design.title,
     description: design.description,
-    url: `${siteConfig.url}/designs/${design._id}`,
+    url: `${siteConfig.url}/designs/${generateDesignUrl(design._id, design.title)}`,
     image: design.previewImages?.[0]?.path
       ? `${process.env.NEXT_PUBLIC_IMAGE_HOSTING_URL}${
           design.previewImages[0].path
@@ -315,7 +317,7 @@ export function generateCollectionSchema(designs, title, description) {
         item: {
           "@type": "CreativeWork",
           name: design.title,
-          url: `${siteConfig.url}/designs/${design._id}`,
+          url: `${siteConfig.url}/designs/${generateDesignUrl(design._id, design.title)}`,
         },
       })),
     },
